@@ -2,7 +2,7 @@
 
 
 
-# **react-mesto-api-full**  
+# **react-express-mesto-full**  
 
 
 Версия Node.js 18.18.0-x64
@@ -34,13 +34,13 @@ Frontend https://fifteen.nomoredomainsrocks.ru
 
 Backend https://api.fifteen.nomoredomainsrocks.ru
 
-https://github.com/ElenaUstimenko/react-mesto-api-full
+https://github.com/ElenaUstimenko/react-express-mesto-full
 
 ---
 
 
 
-# **react-mesto-api-full**   
+# **react-express-mesto-full**   
 
 
 Version of Node.js 18.18.0-x64
@@ -72,4 +72,4 @@ Frontend https://fifteen.nomoredomainsrocks.ru
 
 Backend https://api.fifteen.nomoredomainsrocks.ru
 
-https://github.com/ElenaUstimenko/react-mesto-api-full
+https://github.com/ElenaUstimenko/react-express-mesto-full

@@ -1,10 +1,6 @@
-import React from 'react';
-
 class Api {
-  constructor(config) {
-    this._url = config.baseUrl;
-    this._headers = config.headers;
-    this.authorization = config.headers.authorization; // token
+  constructor({ baseUrl }) {
+    this._url = baseUrl;
   }
 
   _handleResponse(res) {
@@ -25,7 +21,9 @@ class Api {
   getCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     })
     .then(this._handleResponse)
   };
@@ -34,7 +32,9 @@ class Api {
   getUserIDInfo() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     })
     .then(this._handleResponse)
   };
@@ -43,7 +43,9 @@ class Api {
   newCardData({name, link}) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
       body: JSON.stringify({
         name: name,
         link: link,
@@ -55,7 +57,9 @@ class Api {
   photoOfAvatar(avatar) {
   return fetch(`${this._url}/users/me/avatar`, {
     method: "PATCH",
-    headers: this._headers,
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+    },
     body: JSON.stringify(avatar)
     }).then(this._handleResponse)
   };
@@ -64,7 +68,9 @@ class Api {
   userInformation({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },   
       body: JSON.stringify({
         name: name,
         about: about,
@@ -74,16 +80,20 @@ class Api {
 
   // лайки
   addLike(cardID) {
-    return fetch(`${this._url}/cards/likes/${cardID}`, {
+    return fetch(`${this._url}/cards/${cardID}/likes`, {
       method: "PUT",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     }).then(this._handleResponse)
   };
 
   deleteLike(cardID) {
-    return fetch(`${this._url}/cards/likes/${cardID}`, {
+    return fetch(`${this._url}/cards/${cardID}/likes`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     }).then(this._handleResponse)
   };
 
@@ -91,17 +101,16 @@ class Api {
   deleteCard(cardID) {
     return fetch(`${this._url}/cards/${cardID}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      },
     })
   .then(this._handleResponse)
 };
 };
 
 export const api = new Api({
-  //baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
-  baseUrl: 'https://api.fifteen.nomoredomainsrocks.ru',
-  headers: {
-    // authorization: 'b6c2ceaf-2bff-4edb-9d30-ddef75ef1cb1',
-    'Content-type': 'application/json'
-  },
+  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
+  // baseUrl: 'https://api.fifteen.nomoredomainsrocks.ru',
+  baseUrl: 'http://localhost:3000'
 });

@@ -1,7 +1,6 @@
-import React from 'react';
-
 // export const baseURL = 'https://auth.nomoreparties.co';
-export const baseURL = 'https://fifteen.api.nomoredomainsrocks.ru';
+export const baseURL = 'http://localhost:3000';
+// export const baseURL = 'https://fifteen.api.nomoredomainsrocks.ru';
 
 // функция register - принимает почту и пароль, отправляет запрос регистрации на /signup
 export const register = ({email, password}) => {
@@ -19,24 +18,26 @@ export const register = ({email, password}) => {
 
 // функция login - принимает почту и пароль, отправляет запрос авторизации на /signin
 // в ответ сервер вернет jwt, который нужно сохранить в localStorage
-export const login = ({email, password}) => {
+export const login = ({ email, password }) => {
   return fetch(`${baseURL}/signin`, {
    method: "POST",
    headers: {
     'Content-Type': 'application/json'
    },
-   body: JSON.stringify({email, password})
-  }).then(handleResponse);
+   body: JSON.stringify({ email, password })
+  })
+  .then(handleResponse)
  };
 
 // функция checkToken - принимает jwt, отправляет запрос на /users/me и 
 // возвращает данные пользователя
-export const checkToken = (token) => {
+export const checkToken = () => {
+  const token = localStorage.getItem('jwt');
   return fetch(`${baseURL}/users/me`, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
-      authorization : `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     },
   }).then(handleResponse);
 };

@@ -27,14 +27,14 @@ function App(props) {
 
   // checkToken - вызывается при монтировании App, и отправляет запрос checkToken если jwt есть в хранилище
   useEffect (() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
       if(token) {
         checkToken(token)
         .then((res) => {
-          if(res.data) {
+          if(res) {
             setLoggedIn(true);
             navigate('/');
-            setIsHeaderEmail(res.data.email);
+            setIsHeaderEmail(res.email);
             // console.log(res)
           } else {
             navigate('/sign-in');
@@ -53,6 +53,7 @@ function App(props) {
           about: currentUser.about,
           avatar: currentUser.avatar,
           _id: currentUser._id,
+          email: currentUser.email,
         })
     }).catch(console.error)
   }, [loggedIn]);
@@ -93,10 +94,10 @@ function App(props) {
     return login({email, password}).then((res) => {
       // console.log(res)
       
-      if (res.token) {
+      if (res.jwt) {
         setLoggedIn(true);
-        localStorage.setItem('token', res.token)
-        console.log(localStorage.getItem('token'))
+        localStorage.setItem('jwt', res.jwt)
+        console.log(localStorage.getItem('jwt'))
         navigate('/')
         setIsHeaderEmail(email);
       }
@@ -109,7 +110,7 @@ function App(props) {
 
   const handleSignout = (res) => {
     setLoggedIn(false);
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
     navigate('/sign-in');
   };
   
@@ -206,7 +207,7 @@ function App(props) {
   
   const handleCardLike = (card) => {
 	  //проверяем, есть ли уже лайк на этой карточке
-	   const isLiked = card.likes.some(i => i._id === currentUser._id);
+	   const isLiked = card.likes.some(id => id === currentUser._id);
     // отправляем запрос в API и получаем обновлённые данные карточки
     if (!isLiked) {
       api.addLike(card._id)
@@ -241,7 +242,7 @@ function App(props) {
 
 
   // после завершения запроса обновляем стейт currentUser из полученных данных 
-  const handleUpdateUser = ({name, about}) => {
+    const handleUpdateUser = ({name, about}) => {
     setIsLoading(true);
     // debugger
     api.userInformation({name, about})

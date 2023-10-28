@@ -22,12 +22,13 @@ function Card({onCardClick, onCardLike, onCardDelete, ...props}) {
   const currentUser = React.useContext(CurrentUserContext);
   
   // проверяем, есть ли уже лайк на этой карточке
-   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+   const isLiked = props.card.likes.some(id => id === currentUser._id);
   // создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__button_like ${isLiked ? 'element__button_like_active' :' '}`;
   
   // для корзины удаления => определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = props.card.owner._id === currentUser._id;
+  const isOwn = props.card.owner === currentUser._id;
+  
   // создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = 
   `${isOwn ? 'element__button_delete' : ' '}`;

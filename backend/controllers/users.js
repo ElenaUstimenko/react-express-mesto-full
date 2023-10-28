@@ -21,7 +21,6 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
       return res.send({ jwt: token });
-      // return res.send({ token });
     })
     .catch((err) => {
       if (err.name === 'AuthorizationError') {
@@ -82,7 +81,6 @@ const getUsers = async (req, res, next) => {
 const getUserMe = async (req, res, next) => {
   try {
     const user = await User.findById({ _id: req.user._id });
-
     if (!user) {
       throw new NotFoundError('Пользователь по указанному _id не найден');
     }
