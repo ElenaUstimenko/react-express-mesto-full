@@ -235,6 +235,7 @@ function App(props) {
       // используя методы массива, создаем новый массив карточек, 
       // где не будет карточки, которую мы только что удалили
       setCards((cards) => cards.filter((c) => c._id !== cardID)); 
+      // setCards((cards) => cards.filter((id) => id !== cardID));
     }).catch(console.error)
   };
 

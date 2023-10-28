@@ -32,12 +32,11 @@ export const login = ({ email, password }) => {
 // функция checkToken - принимает jwt, отправляет запрос на /users/me и 
 // возвращает данные пользователя
 export const checkToken = () => {
-  const token = localStorage.getItem('jwt');
   return fetch(`${baseURL}/users/me`, {
     method: "GET",
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     },
   }).then(handleResponse);
 };

@@ -20,9 +20,7 @@ const createCard = async (req, res, next) => {
   try {
     const { name, link } = req.body;
     const ownerId = req.user._id;
-    // const ownerId = req.user;
     const newCard = await Card.create({ name, link, owner: ownerId });
-    console.log(name);
     return res.status(201).send(await newCard.save());
   } catch (err) {
     if (err instanceof mongoose.Error.ValidationError) {
@@ -40,7 +38,7 @@ const deleteCard = (req, res, next) => {
     .orFail()
     .populate('owner')
     .then((card) => {
-      const ownerId = card.owner.toString();
+      const ownerId = card.owner._id.toString();
       // console.log('cardId', cardId);
       // console.log('ownerId', ownerId);
       // console.log('userId', userId);
@@ -71,7 +69,6 @@ function likeCard(req, res, next) {
     { $addToSet: { likes: userId } },
     { new: true },
   )
-    // .populate(['likes', 'owner'])
     .then((card) => {
       if (card) {
         res.send(card);

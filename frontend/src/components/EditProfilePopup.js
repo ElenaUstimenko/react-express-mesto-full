@@ -28,12 +28,11 @@ function EditProfilePopup(props) {
     setDescription(currentUser?.about ??'');
   }, [currentUser, isOpen]);
 
-
   function handleSubmit(evt) {
     evt.preventDefault();
 
       // передаём значения управляемых компонентов во внешний обработчик
-      props.onUpdateUser({ name, about: description });
+      props.onUpdateUser({ name: name, about: description });
   };
 
   return (
