@@ -21,7 +21,7 @@ const {
 // создаём приложение
 const app = express();
 
-/* const corseAllowedOrigins = [
+const corseAllowedOrigins = [
   'http://fifteen.nomoredomainsrocks.ru/',
   'https://fifteen.nomoredomainsrocks.ru/',
 ];
@@ -30,8 +30,8 @@ app.use(cors({
   origin: corseAllowedOrigins,
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-})); */
-app.use(cors());
+}));
+// app.use(cors());
 app.use(cookieParser()); // для чтения кук
 app.use(helmet()); // для защиты приложения путем настройки заголовков HTTP
 app.use(limiter); // ограничивает количество запросов с одного IP-адреса в единицу времени
