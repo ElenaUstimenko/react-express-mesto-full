@@ -181,7 +181,7 @@ function App(props) {
    .then((cards) => { 
       setCards(cards);
     }).catch(console.error)
-  }, []);
+  }, [loggedIn]);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////// user's context
   
@@ -201,7 +201,7 @@ function App(props) {
       _id: currentUser._id,
     })
     }).catch(console.error)
-    }, []);
+    }, [loggedIn]);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////// likes
   

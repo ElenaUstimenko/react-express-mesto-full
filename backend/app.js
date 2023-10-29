@@ -22,8 +22,8 @@ const {
 const app = express();
 
 const corseAllowedOrigins = [
-  'http://fifteen.nomoredomainsrocks.ru/',
-  'https://fifteen.nomoredomainsrocks.ru/',
+  'http://fifteen.nomoredomainsrocks.ru',
+  'https://fifteen.nomoredomainsrocks.ru',
 ];
 
 app.use(cors({
