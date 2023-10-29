@@ -178,11 +178,13 @@ function App(props) {
   
   // сохраняем в стэйт весь массив, который получаем с сервера
   useEffect(() => {
-    
-    api.getCards()
-   .then((cards) => { 
-      setCards(cards);
-    }).catch(console.error)
+    const token = localStorage.getItem('jwt');
+    if(token) {
+      api.getCards()
+      .then((cards) => { 
+        setCards(cards);
+      }).catch(console.error)
+    }
   }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////// user's context
@@ -192,18 +194,21 @@ function App(props) {
   // эффект, вызываемый при монтировании компонента, который будет 
   // совершать запрос в API за пользовательскими данными
   useEffect(() => {
-    api.getUserIDInfo()
-    .then((currentUser) => {
+    const token = localStorage.getItem('jwt');
+    if(token) {
+      api.getUserIDInfo()
+      .then((currentUser) => {
       //console.log(currentUser);
-    // user information - обновление стейт переменной из получ.значения
-    setCurrentUser({
-      name: currentUser.name,
-      about: currentUser.about,
-      avatar: currentUser.avatar,
-      _id: currentUser._id,
-    })
-    }).catch(console.error)
-    }, []);
+      // user information - обновление стейт переменной из получ.значения
+        setCurrentUser({
+          name: currentUser.name,
+          about: currentUser.about,
+          avatar: currentUser.avatar,
+          _id: currentUser._id,
+      })
+      }).catch(console.error)
+    }
+  }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////// likes
   
