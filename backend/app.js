@@ -31,7 +31,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
-// app.use(cors());
+
 app.use(cookieParser()); // для чтения кук
 app.use(helmet()); // для защиты приложения путем настройки заголовков HTTP
 app.use(limiter); // ограничивает количество запросов с одного IP-адреса в единицу времени

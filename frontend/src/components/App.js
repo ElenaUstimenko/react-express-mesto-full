@@ -43,19 +43,21 @@ function App(props) {
       }
   }, []);
 
-  useEffect (() => {
-    if (loggedIn)
-    Promise.all([api.getCards(), api.getUserIDInfo()])
-    .then(([cards, currentUser]) => {
-        setCards(cards);
-        setCurrentUser({
-          name: currentUser.name,
-          about: currentUser.about,
-          avatar: currentUser.avatar,
-          _id: currentUser._id,
-          email: currentUser.email,
-        })
-    }).catch(console.error)
+   useEffect (() => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      api.getAppInfo()
+      .then(([cards, currentUser]) => {
+          setCards(cards);
+          setCurrentUser({
+            name: currentUser.name,
+            about: currentUser.about,
+            avatar: currentUser.avatar,
+            _id: currentUser._id,
+            email: currentUser.email,
+          })
+      }).catch(console.error)
+    }
   }, [loggedIn]);
 
   // хранение состояния открытия попапа успеха или ошибки регистрации
