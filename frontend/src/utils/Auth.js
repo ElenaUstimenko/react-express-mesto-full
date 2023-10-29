@@ -1,5 +1,5 @@
 // export const baseURL = 'http://localhost:3000';
-export const baseURL = 'https://fifteen.api.nomoredomainsrocks.ru';
+export const baseURL = 'https://api.fifteen.nomoredomainsrocks.ru';
 
 // функция register - принимает почту и пароль, отправляет запрос регистрации на /signup
 export const register = ({email, password}) => {
