@@ -47,7 +47,7 @@ const createUsers = async (req, res, next) => {
     const user = await User.create({
       email, password: hash, name, about, avatar,
     });
-    return res.status(200).send({
+    return res.status(201).send({
       user: {
         email: user.email,
         name: user.name,

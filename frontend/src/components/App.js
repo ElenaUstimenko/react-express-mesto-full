@@ -103,7 +103,11 @@ function App(props) {
         navigate('/')
         setIsHeaderEmail(email);
       }
-    }).catch(console.error)
+    }).catch((error) => {
+      setSuccessPopupOpen(true); // открыть попап
+      setIsSuccessImage(false); // попап с ошибкой
+      console.log(error)
+    })
   };
 
   // handleSignout - передается в компонент Header, в котором будет кнопка выхода, 
